@@ -18,5 +18,10 @@
   "bugs": {
     "url": "https://github.com/FACG6/animal-autocomplet/issues"
   },
-  "homepage": "https://github.com/FACG6/animal-autocomplet#readme"
+  "homepage": "https://github.com/FACG6/animal-autocomplet#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.9",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.9.2"
+  }
 }
