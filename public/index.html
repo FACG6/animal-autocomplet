@@ -3,24 +3,21 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Animals</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="style/style.css" />
-    <script src="main.js"></script>
+    <link rel='icon' href='./public/image/icon.ico' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" media="screen" href="./public/css/main.css" />
 </head>
 <body>
-    <div class="search" id="search">
-   
-    </div> 
     <div class="container">
-    <form id="add-todo" class="add-form">
+    <form class="search" action="/search" method="POST">
       <label for = "add-input"></label>
-      <input id = "add-input" autocomplete="off" type="text" name="description" value="" placeholder="Enter your tasks">
-      <div class="btn">
+      <input id = "add-input" autocomplete="off" type="text" name="description" value="" placeholder="Enter your Search">
         <label for = "add-button"></label>
         <input id = "add-button" class= "addbutton" type="submit" value="Search" type="submit" >
     </form>
-    <div id="todo-container">
+    <div id="autoComplete" class="autoComplete"></div>
+    <div id="search_result" class="resultSearch">
     </div>
   </div>
   </div>
