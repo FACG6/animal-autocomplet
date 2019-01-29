@@ -3,15 +3,25 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Animals</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
-    
+    <link rel='icon' href='./public/image/icon.ico' type='image/x-icon'/>
+    <link rel="stylesheet" type="text/css" media="screen" href="./public/css/main.css" />
 </head>
 <body>
-    <div></div>
-    <script src="js/logic.js"></script>
-    <script src="js/Dom.js"></script>
-    <!-- <script src="main.js"></script> -->
+    <div class="container">
+    <form class="search" action="/search" method="POST">
+      <label for = "add-input"></label>
+      <input id = "add-input" autocomplete="off" type="text" name="description" value="" placeholder="Enter your Search">
+        <label for = "add-button"></label>
+        <input id = "add-button" class= "addbutton" type="submit" value="Search" type="submit" >
+    </form>
+    <div id="autoComplete" class="autoComplete"></div>
+    <div id="search_result" class="resultSearch">
+    </div>
+  </div>
+  </div>
+  <script src="./public/js/logic.js"></script>
+    <script src="./public/js/Dom.js"></script>
 </body>
 </html>
