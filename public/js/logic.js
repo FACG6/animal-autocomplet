@@ -1,4 +1,4 @@
-const url = "../../src/animal.json";
+// const url = "../../src/animal.json";
 
 
 const xhr = new XMLHttpRequest();
@@ -7,9 +7,10 @@ function xhrRequest(method, url, callback){
     xhr.onreadystatechange= () =>{
 
         if(xhr.readyState === 4  && xhr.status === 200){
-            let response = xhr.responseText;
+            let response = JSON.parse(xhr.responseText);
             callback(response);
-            console.log(response.url.);
+            // const result = Object.keys(response);
+            // console.log(result);
         }
 
     }
@@ -18,7 +19,7 @@ function xhrRequest(method, url, callback){
 
 }
 
-function cb(){
-    console.log("ahmed");
-}
-xhrRequest("Get",url,cb);
+// module.exports=xhrRequest;
+
+
+
