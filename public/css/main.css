@@ -13,11 +13,12 @@ body {
 
 .container {
     background-color: rgba(0, 0, 0, 0.267);
-    width: 50%;
+    width: 80%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     margin-top: 5%;
+    position: relative;
 }
 
 
@@ -30,6 +31,7 @@ body {
 /* start the form tag  */
 
 .search {
+    position: relative;
     display: flex;
     width: 100%;
     height: 90px;
@@ -38,7 +40,7 @@ body {
 }
 
 .search input[type="text"] {
-    width: 55%;
+    width: 70%;
     margin: 0 auto;
     background: white;
     margin-top: 0.7rem;
@@ -47,6 +49,8 @@ body {
     height: 4em;
     font-size: 1em;
     padding: 0.8em;
+    position: absolute;
+    left: 20px;
 }
 
 .search input[type="text"],
@@ -57,6 +61,34 @@ body {
     border: none;
 }
 
+.listDiv{
+    
+    position: absolute;
+    top: 75px;
+    left: 20px;
+    width: 80%;
+    margin-bottom: 100px; 
+}
+
+.listUl{
+    position: relative;
+    list-style-type:none ;
+    width: 88%;
+    left: 0;
+
+}
+.listLi{
+    cursor: pointer;
+    padding: 8px 10px;
+    
+}
+.listLi:nth-child(even){
+    background: #817778;
+}
+
+.listLi:nth-child(odd){
+    background: rgb(175, 175, 154);
+}
 
 /* end the form  */
 
@@ -64,6 +96,9 @@ body {
 /* start button  */
 
 .addbutton {
+    position: absolute;
+    right: 15px;
+    display: inline-block;
     padding: 0.7rem;
     border: none;
     outline: none;
@@ -88,11 +123,16 @@ body {
 /* end button  */
 
 @media(max-width:700px) {
-    h2 {
+    /* h2 {
         font-size: 2em;
     }
 
     .container {
         width: 100%;
-    }
+    } */
+}
+
+/*result of search */
+.result-item {
+    display: flex;
 }
