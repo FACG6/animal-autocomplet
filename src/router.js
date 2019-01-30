@@ -1,4 +1,4 @@
-const {handelHomePage,handelPublicFiles,handelNotFound,handelResultPage} = require('./handler');
+const {handelHomePage,handelPublicFiles,handelNotFound,handelResultPage,handelSearchPage} = require('./handler');
 const router = (request, response) => {
     const endPoint = request.url;
     if (endPoint === '/') {
@@ -11,6 +11,8 @@ const router = (request, response) => {
         
     } else if(endPoint === '/result'){
         handelResultPage(request,response);
+    }else if(endPoint === '/search'){
+        handelSearchPage(request,response);
     }
     else {
 
