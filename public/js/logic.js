@@ -1,25 +1,17 @@
-// const url = "../../src/animal.json";
-
-
-const xhr = new XMLHttpRequest();
-
-function xhrRequest(method, url, callback){
-    xhr.onreadystatechange= () =>{
-
-        if(xhr.readyState === 4  && xhr.status === 200){
+const xhrRequest = (method,url,callback) => {
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
             let response = JSON.parse(xhr.responseText);
+            // console.log(response);
             callback(response);
-            // const result = Object.keys(response);
-            // console.log(result);
         }
-
     }
-    xhr.open("GET",url);
+    xhr.open(method,url,true);
     xhr.send();
 
 }
 
-// module.exports=xhrRequest;
 
 
 
