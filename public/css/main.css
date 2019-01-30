@@ -96,3 +96,8 @@ body {
         width: 100%;
     }
 }
+
+/*result of search */
+.result-item {
+    display: flex;
+}
