@@ -121,18 +121,3 @@ body {
 }
 
 /* end button  */
-
-@media(max-width:700px) {
-    /* h2 {
-        font-size: 2em;
-    }
-
-    .container {
-        width: 100%;
-    } */
-}
-
-/*result of search */
-.result-item {
-    display: flex;
-}
