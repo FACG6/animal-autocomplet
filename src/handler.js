@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const querystring = require('querystring');
-const handelHomePage = (request, response, endPoint) => {
+const handelHomePage = (request, response) => {
     const filePath = path.join(__dirname, '..', 'public', 'index.html');
     fs.readFile(filePath, (error, file) => {
         if (error) {
@@ -62,6 +62,7 @@ const handelResultPage = (request,response)=>{
             });
             response.end('server error');
         }else{
+
             response.writeHead(200,{'content-type':'application/json'});
             response.end(file);
         }
