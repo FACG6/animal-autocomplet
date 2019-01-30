@@ -3,19 +3,40 @@ const form = document.querySelector(".search");
 const textInput = document.getElementById("add-input");
 const createImage = document.createElement('img');
 const createUl = document.createElement('ul');
-const createLi = document.createElement('li');
 const createDiv = document.createElement('div');
 
-textInput.addEventListener('keyup', () => {
-    // createDiv.appendChild();
-    const result = xhrRequestKeyUp((response) => {
-        const value = textInput.value;
-        const result = filterAutoComlete(response, value);
+createDiv.setAttribute('class','listDiv');
+createUl.setAttribute('class','listUl');
 
+
+textInput.addEventListener('keyup', () => {
+    const value =  textInput.value.toUpperCase();
+    if (value ===""|| value ===" "){
+        deleteChild(createUl);
+        return ;
+    }else{
+    form.appendChild(createDiv);
+    console.log("jamal");
+    createDiv.appendChild(createUl);
+    const result = xhrRequest((response) => {
+        console.log(value);
+        const result = filterAutoComlete(response, value);
+        deleteChild(createUl);
+        result.forEach(element =>{
+            const createLi = document.createElement('li');
+            createUl.appendChild(createLi);
+            createLi.textContent=element;
+            createLi.setAttribute('class','listLi');
+        })
+    
+        
     })
 
-
+    }
 
 });
-
-console.log('sdbfhj')
+let deleteChild = (parent) => {
+    while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+    }
+  }
