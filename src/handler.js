@@ -77,13 +77,13 @@ const handelSearchPage = (request, response) => {
         allData += chunkData;
     });
     request.on('end', () => {
-        fs.readFile(filePathSearch,(error,file)=>{
+        fs.readFile(filePathSearch, (error, file) => {
             const parseData = queryString.parse(allData);
             const searchValue = parseData.description;
             const animalFile = JSON.parse(file);
-            const filterResult = JSON.stringify(filterFile(animalFile,searchValue));
-            fs.writeFile(filePathResult,filterResult,err=>{
-                response.writeHead(500,{'content-type':'text/html'});
+            const filterResult = JSON.stringify(filterFile(animalFile, searchValue));
+            fs.writeFile(filePathResult, filterResult, err => {
+                response.writeHead(500, { 'content-type': 'text/html' });
                 response.end('server Error');
             })
         })
@@ -93,12 +93,25 @@ const handelSearchPage = (request, response) => {
         response.end();
     });
 }
+const handelAnimalPage = (request, response) => {
+    const pathFile = path.join(__dirname, "animal.json")
+    fs.readFile(pathFile, (error, file) => {
+        if (error) {
+            response.writeHead(500, { 'content-type': 'text/html' });
+            response.end('server Error');
+        } else {
+            console.log(file)
+            response.writeHead(200, { "content-Type": "application/json" })
+            response.end(file);
+        }
+    })
+}
 
-const filterFile = (file,data)=>{
+const filterFile = (file, data) => {
     let filterData = {};
-    for(let key in file){
-        if(key.indexOf(data) !== -1){
-            filterData[key]=file[key];
+    for (let key in file) {
+        if (key.indexOf(data) !== -1) {
+            filterData[key] = file[key];
         }
     }
     return filterData;
@@ -108,5 +121,6 @@ module.exports = {
     handelPublicFiles,
     handelNotFound,
     handelResultPage,
-    handelSearchPage
+    handelSearchPage,
+    handelAnimalPage
 }
