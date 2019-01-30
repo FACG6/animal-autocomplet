@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const querystring = require('querystring');
-const handelHomePage = (request, response) => {
+const queryString = require('querystring');
+const handelHomePage = (request, response, endPoint) => {
     const filePath = path.join(__dirname, '..', 'public', 'index.html');
     fs.readFile(filePath, (error, file) => {
         if (error) {
@@ -45,7 +45,6 @@ const handelPublicFiles = (request, response, endPoint) => {
 
 }
 
-
 const handelNotFound = (request, response) => {
     response.writeHead(404, {
         'content-type': 'text/html'
@@ -53,24 +52,61 @@ const handelNotFound = (request, response) => {
     response.end('<h1>page not found</h1>');
 }
 
-const handelResultPage = (request,response)=>{
-    const filePathResult = path.join(__dirname,'result.json'); 
-    fs.readFile(filePathResult,(error,file)=>{
-        if(error){
+const handelResultPage = (request, response) => {
+    const filePathResult = path.join(__dirname, 'result.json');
+    fs.readFile(filePathResult, (error, file) => {
+        if (error) {
             response.writeHead(500, {
                 'content-type': 'text/html'
             });
             response.end('server error');
-        }else{
-
-            response.writeHead(200,{'content-type':'application/json'});
+        } else {
+            response.writeHead(200, {
+                'content-type': 'application/json'
+            });
             response.end(file);
         }
     })
+}
+
+const handelSearchPage = (request, response) => {
+    const filePathSearch = path.join(__dirname, "animal.json");
+    const filePathResult = path.join(__dirname, "result.json");
+    let allData = '';
+    request.on('data', chunkData => {
+        allData += chunkData;
+    });
+    request.on('end', () => {
+        fs.readFile(filePathSearch,(error,file)=>{
+            const parseData = queryString.parse(allData);
+            const searchValue = parseData.description;
+            const animalFile = JSON.parse(file);
+            const filterResult = JSON.stringify(filterFile(animalFile,searchValue));
+            fs.writeFile(filePathResult,filterResult,err=>{
+                response.writeHead(500,{'content-type':'text/html'});
+                response.end('server Error');
+            })
+        })
+        response.writeHead(302, {
+            'location': '/'
+        });
+        response.end();
+    });
+}
+
+const filterFile = (file,data)=>{
+    let filterData = {};
+    for(let key in file){
+        if(key.indexOf(data) !== -1){
+            filterData[key]=file[key];
+        }
+    }
+    return filterData;
 }
 module.exports = {
     handelHomePage,
     handelPublicFiles,
     handelNotFound,
-    handelResultPage
+    handelResultPage,
+    handelSearchPage
 }
