@@ -50,8 +50,24 @@ const handelNotFound = (request,response)=>{
     });
     response.end('<h1>page not found</h1>');
 }
+
+const handelResultPage = (request,response)=>{
+    const filePathResult = path.join(__dirname,'result.json'); 
+    fs.readFile(filePathResult,(error,file)=>{
+        if(error){
+            response.writeHead(500, {
+                'content-type': 'text/html'
+            });
+            response.end('server error');
+        }else{
+            response.writeHead(200,{'content-type':'application/json'});
+            response.end(file);
+        }
+    })
+}
 module.exports = {
     handelHomePage,
     handelPublicFiles,
-    handelNotFound
+    handelNotFound,
+    handelResultPage
 }
