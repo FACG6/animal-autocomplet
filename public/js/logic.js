@@ -1,6 +1,11 @@
-
-        const filterAutoComlete = (response,value)=>{
-            const fileKeys =Object.keys(response);
-            return fileKeys.filter(element=>element.indexOf(value)!==-1);
+const filterFile = (response, data) => {
+    let filterData = {};
+    for (let key in response) {
+        if (key.toUpperCase().indexOf(data.toUpperCase()) !== -1) {
+            filterData[key] = response[key];
         }
-        
+    }
+    return filterData;
+}
+const description = (key)=>key.description;
+const img = (key)=>key.image;
