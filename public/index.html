@@ -12,17 +12,18 @@
 
 <body>
     <div class="container">
-        <form class="search" action="/search" method="POST">
-            <label for="add-input"></label>
-            <input id="add-input" autocomplete="off" type="text" name="description" value="" placeholder="Enter your Search">
-            <label for="add-button"></label>
-            <input id="add-button" class="addbutton" type="submit" value="Search" type="submit">
-        </form>
-        <div id="autoComplete" class="autoComplete"></div>
+    <form class="search" action="/search" method="POST">
+      <label for = "add-input"></label>
+      <input id = "add-input" autocomplete="off" type="text" name="description" value="" placeholder="Enter your Search">
+        <label for = "add-button"></label>
+        <input id = "add-button" class= "addbutton" type="submit" value="Search" type="submit" >
+    </form>
+    <div id="autoComplete" class="autoComplete"></div>
+  </div>
+  <div id="search_result" class="resultSearch">
     </div>
-
-    <script src="./public/js/logic.js"></script>
-    <script src="./public/js/request.js"></script>
+  <script src="./public/js/logic.js"></script>
+  <script src="./public/js/request.js"></script>
     <script src="./public/js/Dom.js"></script>
 </body>
 
