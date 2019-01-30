@@ -143,6 +143,9 @@ body {
 
 .resultSearch img{
     margin: 30px 0;
+    border: 1px solid #808080ad;
+    padding: 10px;
+    border-radius: 7px;
 }
 @media (max-width:500px){
     .addbutton{
