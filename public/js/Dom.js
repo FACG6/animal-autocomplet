@@ -1,8 +1,5 @@
 const formSubmit = document.querySelector('.search');
 const textInput = document.getElementById("add-input");
-const createImage = document.createElement('img');
-const createUl = document.createElement('ul');
-const createDiv = document.createElement('div');
 
 const createElements = (tag, name, parent, className) => {
     let newElement = document.createElement(tag);
@@ -13,6 +10,7 @@ const createElements = (tag, name, parent, className) => {
         newElement.textContent = name;
     }
     parent.appendChild(newElement);
+    return newElement;
 }
 
 let deleteChild = (parent) => {
@@ -20,38 +18,28 @@ let deleteChild = (parent) => {
         parent.removeChild(parent.firstChild);
     }
 }
-createDiv.setAttribute('class', 'listDiv');
-createUl.setAttribute('class', 'listUl');
 
+const createDiv = createElements('div', '', formSubmit, 'listDiv');
+const createUl = createElements('ul', '', createDiv, 'listUl');
 
 textInput.addEventListener('keyup', () => {
     const value = (textInput.value).trim();
     if (!value) {
         deleteChild(createUl);
-        return;
     } else {
-        formSubmit.appendChild(createDiv);
-        createDiv.appendChild(createUl);
         const result = xhrRequest((response) => {
             const result = filterFile(response, value);
             const keysResult = Object.keys(result);
             deleteChild(createUl);
             keysResult.forEach(element => {
-                const createLi = document.createElement('li');
-                createUl.appendChild(createLi);
-                createLi.textContent = element;
-                createLi.setAttribute('class', 'listLi');
-                createLi.addEventListener('click',(e)=>{
+                let createLi = createElements('li', element, createUl, 'listLi');
+                createLi.addEventListener('click', (e) => {
                     textInput.value = e.target.textContent;
                     deleteChild(createUl);
                 })
             })
-
-
         })
-
     }
-
 });
 
 formSubmit.addEventListener('submit', (e) => {

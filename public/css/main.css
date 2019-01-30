@@ -111,13 +111,14 @@ body {
     color: #fff;
     margin: 1.25rem auto;
     font-size: 14px;
-    background-color: #ff6a80;
+    background-color: #bb243b;
     text-shadow: 0 1px rgba(0, 0, 0, 0.4);
     box-shadow: 0 2px 2px 0 #a25561;
     font-weight: 700;
     background-repeat: no-repeat;
     background-position: 200px;
-    font-size: 1.1em;
+    font-size: 1em;
+    width: 16%;
 }
 
 .addbutton:hover {
@@ -142,4 +143,10 @@ body {
 
 .resultSearch img{
     margin: 30px 0;
+}
+@media (max-width:500px){
+    .addbutton{
+        font-size: 10px;
+        height: 42px;
+    }
 }
