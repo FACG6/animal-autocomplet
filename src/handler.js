@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const handelHomePage = (request,response,endPoint)=>{
+const querystring = require('querystring');
+const handelHomePage = (request, response, endPoint) => {
     const filePath = path.join(__dirname, '..', 'public', 'index.html');
     fs.readFile(filePath, (error, file) => {
         if (error) {
@@ -17,34 +18,46 @@ const handelHomePage = (request,response,endPoint)=>{
     });
 }
 
-const handelPublicFiles = (request,response,endPoint)=>{
+const handelPublicFiles = (request, response, endPoint) => {
     const extention = path.extname(endPoint).substr(1);
-        const contentType = {
-            js: "text/javascript",
-            css: "text/css",
-            html: "text/html",
-            json:"application/json",
-            ico:"image/x-icon"
+    const contentType = {
+        js: "text/javascript",
+        css: "text/css",
+        html: "text/html",
+        json: "application/json",
+        ico: "image/x-icon"
+    }
+    const fileName = endPoint.split('/');
+    const filePath = path.join(__dirname, '..', ...fileName);
+    fs.readFile(filePath, (error, file) => {
+        if (error) {
+            response.writeHead(500, {
+                'content-type': 'text/html'
+            });
+            response.end('server error');
+        } else {
+            response.writeHead(200, {
+                'content-type': contentType[extention]
+            });
+            response.end(file);
         }
-        const fileName = endPoint.split('/');
-        const filePath = path.join(__dirname, '..',...fileName);
-        fs.readFile(filePath, (error, file) => {
-            if (error) {
-                response.writeHead(500, {
-                    'content-type': 'text/html'
-                });
-                response.end('server error');
-            } else {
-                response.writeHead(200, {
-                    'content-type': contentType[extention]
-                });
-                response.end(file);
-            }
-        })
-        
+    })
+
+}
+const hadelSearchRequest = (request, response) => {
+    const pathFile = path.join(__dirname, 'animal.json');
+    fs.readFile(pathFile, (error, file) => {
+        if (error) {
+            
+        } else {
+            console.log(JSON.parse(file));
+            response.writeHead(200, { "conent-Type": "application/json" });
+            response.end(file);
+        }
+    })
 }
 
-const handelNotFound = (request,response)=>{
+const handelNotFound = (request, response) => {
     response.writeHead(404, {
         'content-type': 'text/html'
     });
@@ -53,5 +66,7 @@ const handelNotFound = (request,response)=>{
 module.exports = {
     handelHomePage,
     handelPublicFiles,
+    hadelSearchRequest,
     handelNotFound
+
 }
