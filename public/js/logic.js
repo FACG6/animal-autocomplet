@@ -9,3 +9,5 @@ const filterFile = (response, data) => {
 }
 const description = (key)=>key.description;
 const img = (key)=>key.image;
+
+module.exports = {filterFile,description,img};
