@@ -9,5 +9,6 @@ const filterFile = (response, data) => {
 }
 const description = (key)=>key.description;
 const img = (key)=>key.image;
-
+if(typeof module !== "undefined"){
 module.exports = {filterFile,description,img};
+}
