@@ -100,7 +100,7 @@ const handelAnimalPage = (request, response) => {
             response.writeHead(500, { 'content-type': 'text/html' });
             response.end('server Error');
         } else {
-            console.log(file)
+            
             response.writeHead(200, { "content-Type": "application/json" })
             response.end(file);
         }
