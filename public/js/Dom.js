@@ -25,8 +25,8 @@ createUl.setAttribute('class', 'listUl');
 
 
 textInput.addEventListener('keyup', () => {
-    const value = textInput.value.toUpperCase();
-    if (value === "" || value === " ") {
+    const value = (textInput.value).trim();
+    if (!value) {
         deleteChild(createUl);
         return;
     } else {
@@ -56,9 +56,8 @@ textInput.addEventListener('keyup', () => {
 
 formSubmit.addEventListener('submit', (e) => {
     e.preventDefault();
-    let value = textInput.value;
+    let value = (textInput.value).trim();
     let containerSearch = document.getElementById('search_result');
-    console.log(value);
     deleteChild(containerSearch);
     deleteChild(createUl);
     xhrRequest((response) => {
