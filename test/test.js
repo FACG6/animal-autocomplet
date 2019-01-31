@@ -50,14 +50,14 @@ test('test for filter',(test)=>{
 test('test for get description',(test)=>{
     const actual = description(data["Black Lechwe"]);
     const expected ="Mammal. A medium-sized antelope, the black lechwe (LEECH-wee) grows to about a meter (3.3 ft) in height, weighing 60 to 128 kg (132 to 282 lb). Unlike other antelope, black lechwe are slow runners but they are good swimmers and are often seen grazing shoulder-deep in water. Their hooves are adapted for swampy areas rather than dry land, and their greasy coats act as a sort of water-proofing but also give off a distinctive odor. Only the males have antlers. They live in dryer areas forming bachelor herds during most of the year. Females and their calves depend on water more than the males and remain closer to it all year round.";
-    test.deepEqual(actual,expected,"the result must equal");
+    test.equal(actual,expected,"the result must equal");
     test.end();
 
 });
 test('test for get img',(test)=>{
     const actual = img(data["Black Lechwe"]);
     const expected ="https://switchzoo.com/assets/profiles/blacklechwe_switchzoo.jpg";
-    test.deepEqual(actual,expected,"the result must equal");
+    test.equal(actual,expected,"the result must equal");
     test.end();
 
 });
