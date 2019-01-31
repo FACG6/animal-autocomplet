@@ -1,11 +1,8 @@
 const formSubmit = document.querySelector('.search');
 const textInput = document.getElementById("add-input");
-const createImage = document.createElement('img');
-const createUl = document.createElement('ul');
-const createDiv = document.createElement('div');
 
 const createElements = (tag, name, parent, className) => {
-    let newElement = document.createElement(tag);
+    const newElement = document.createElement(tag);
     newElement.classList.add(className);
     if (tag === 'img') {
         newElement.src = name;
@@ -13,55 +10,46 @@ const createElements = (tag, name, parent, className) => {
         newElement.textContent = name;
     }
     parent.appendChild(newElement);
+    return newElement;
 }
 
-let deleteChild = (parent) => {
+const deleteChild = (parent) => {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
 }
-createDiv.setAttribute('class', 'listDiv');
-createUl.setAttribute('class', 'listUl');
 
+const createDiv = createElements('div', '', formSubmit, 'listDiv');
+const createUl = createElements('ul', '', createDiv, 'listUl');
 
 textInput.addEventListener('keyup', () => {
     const value = (textInput.value).trim();
     if (!value) {
         deleteChild(createUl);
-        return;
     } else {
-        formSubmit.appendChild(createDiv);
-        createDiv.appendChild(createUl);
-        const result = xhrRequest((response) => {
+        xhrRequest('/animal', 'GET', (response) => {
             const result = filterFile(response, value);
             const keysResult = Object.keys(result);
             deleteChild(createUl);
             keysResult.forEach(element => {
-                const createLi = document.createElement('li');
-                createUl.appendChild(createLi);
-                createLi.textContent = element;
-                createLi.setAttribute('class', 'listLi');
-                createLi.addEventListener('click',(e)=>{
+                let createLi = createElements('li', element, createUl, 'listLi');
+                createLi.addEventListener('click', (e) => {
                     textInput.value = e.target.textContent;
                     deleteChild(createUl);
                 })
             })
-
-
         })
-
     }
-
 });
 
 formSubmit.addEventListener('submit', (e) => {
     e.preventDefault();
-    let value = (textInput.value).trim();
-    let containerSearch = document.getElementById('search_result');
+    const value = (textInput.value).trim();
+    const containerSearch = document.getElementById('search_result');
     deleteChild(containerSearch);
     deleteChild(createUl);
-    xhrRequest((response) => {
-        let result = filterFile(response, value);
+    xhrRequest('/animal', 'GET', (response) => {
+        const result = filterFile(response, value);
         if (Object.keys(result).length == 0 || !(value)) {
             createElements('p', "No Result", containerSearch, 'error');
         } else {
