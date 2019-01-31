@@ -1,5 +1,5 @@
-function xhrRequest(callback){
-    let xhr = new XMLHttpRequest();
+function xhrRequest(url,method,callback){
+    const xhr = new XMLHttpRequest();
     xhr.onreadystatechange= () =>{
 
         if(xhr.readyState === 4){
@@ -12,7 +12,7 @@ function xhrRequest(callback){
         }
 
     }
-    xhr.open("GET",'./animal');
+    xhr.open(method,url);
     xhr.send();
 
 }
