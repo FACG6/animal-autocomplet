@@ -3,7 +3,7 @@ const router = (request, response) => {
     const endPoint = request.url;
     if (endPoint === '/') {
 
-        handelHomePage(request, response, endPoint);
+        handelHomePage(request, response);
 
     } else if (endPoint.indexOf('/public/') !== -1) {
 
